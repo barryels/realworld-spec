@@ -1,27 +1,20 @@
-let domain,
-  separator;
-
-domain = 'https://demo.realworld.io/';
-separator = '#';
-
-domain = 'http://localhost:3000/';
-separator = '?';
-
 function getURL(path) {
   if (!path) {
-    return domain;
+    return Cypress.env('host') + '/';
   }
-  return domain + '' + separator + '' + path;
+  return Cypress.env('host') + '/' + Cypress.env('path_prefix') + '' + path;
 }
 
 describe('Homepage', function () {
   it('should have the correct header links', function () {
     cy.visit(getURL());
 
-    cy.get('nav a').eq(0).contains('conduit');
-    cy.get('nav a').eq(1).contains('Home');
-    cy.get('nav a').eq(2).contains('Sign in');
-    cy.get('nav a').eq(3).contains('Sign up');
+    cy.get('nav a').as('navigationAnchors');
+
+    cy.get('@navigationAnchors').eq(0).contains('conduit');
+    cy.get('@navigationAnchors').eq(1).contains('Home');
+    cy.get('@navigationAnchors').eq(2).contains('Sign in');
+    cy.get('@navigationAnchors').eq(3).contains('Sign up');
   });
 
   it('should navigate to the main pages', function () {
