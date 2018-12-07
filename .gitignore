@@ -1,1 +1,15 @@
+.DS_Store
+
+.Thumb
+
+.idea
+
+*.iml
+
+.vscode
+
 node_modules
+
+npm-debug.log*
+
+test/fixtures/fixtures.js
