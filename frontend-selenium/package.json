@@ -1,0 +1,41 @@
+{
+  "name": "frontend-selenium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webdriver:phantomjs:start": "node ./node_modules/.bin/phantomjs --webdriver=4444",
+    "test:acceptance:against_local": "node ./node_modules/.bin/cucumber-js --config_path 'config.environments.local' --tags 'not @skip' test/acceptance/features",
+    "test:acceptance:against_demo": "node ./node_modules/.bin/cucumber-js --config_path 'config.environments.demo' --tags 'not @skip' test/acceptance/features",
+    "start": "npm run test:acceptance:against_demo",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "config": {
+    "webdrivers": {
+      "phantomjs": {
+        "port": 4444
+      }
+    },
+    "environments": {
+      "local": {
+        "driver": "phantomjs",
+        "url": "http://localhost:3000",
+        "routerPrefix": "?"
+      },
+      "demo": {
+        "driver": "phantomjs",
+        "url": "https://demo.realworld.io",
+        "routerPrefix": "#"
+      }
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chromedriver": "^2.44.1",
+    "cucumber": "^5.0.3",
+    "phantomjs-prebuilt": "^2.1.16",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}
